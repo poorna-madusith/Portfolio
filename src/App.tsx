@@ -1,20 +1,34 @@
-import React, { useEffect, useState } from 'react';
-import { Github, Linkedin, Facebook, Instagram, Mail, ExternalLink, X } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { Github, Linkedin, Facebook, Instagram, Mail, ExternalLink, X, FileText, ChevronLeft, ChevronRight } from 'lucide-react';
 import { projects, socialLinks, about } from './data';
+import { useInView } from './hooks/useInView';
 
 function ImageGalleryModal({ images, onClose }: { images: string[], onClose: () => void }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [slideDirection, setSlideDirection] = useState<'left' | 'right' | ''>('');
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
-      if (e.key === 'ArrowLeft') setCurrentImageIndex(prev => (prev > 0 ? prev - 1 : images.length - 1));
-      if (e.key === 'ArrowRight') setCurrentImageIndex(prev => (prev < images.length - 1 ? prev + 1 : 0));
+      if (e.key === 'ArrowLeft') handlePrevious();
+      if (e.key === 'ArrowRight') handleNext();
     };
 
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [images, onClose]);
+
+  const handleNext = () => {
+    setSlideDirection('right');
+    setCurrentImageIndex(prev => (prev < images.length - 1 ? prev + 1 : 0));
+    setTimeout(() => setSlideDirection(''), 300);
+  };
+
+  const handlePrevious = () => {
+    setSlideDirection('left');
+    setCurrentImageIndex(prev => (prev > 0 ? prev - 1 : images.length - 1));
+    setTimeout(() => setSlideDirection(''), 300);
+  };
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center p-4">
@@ -30,21 +44,27 @@ function ImageGalleryModal({ images, onClose }: { images: string[], onClose: () 
           <img
             src={images[currentImageIndex]}
             alt="Project screenshot"
-            className="w-full h-[80vh] object-contain"
+            className={`w-full h-[80vh] object-contain transition-transform duration-300 ease-in-out ${
+              slideDirection === 'right' ? 'animate-slide-left' : 
+              slideDirection === 'left' ? 'animate-slide-right' : ''
+            }`}
           />
           
           {images.length > 1 && (
-            <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
-              {images.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentImageIndex(index)}
-                  className={`w-2 h-2 rounded-full ${
-                    index === currentImageIndex ? 'bg-white' : 'bg-white/50'
-                  }`}
-                />
-              ))}
-            </div>
+            <>
+              <button
+                onClick={handlePrevious}
+                className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-3 md:p-2 rounded-full transition-all"
+              >
+                <ChevronLeft size={28} />
+              </button>
+              <button
+                onClick={handleNext}
+                className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-3 md:p-2 rounded-full transition-all"
+              >
+                <ChevronRight size={28} />
+              </button>
+            </>
           )}
         </div>
       </div>
@@ -55,29 +75,39 @@ function ImageGalleryModal({ images, onClose }: { images: string[], onClose: () 
 function App() {
   const [isVisible, setIsVisible] = useState(false);
   const [selectedImages, setSelectedImages] = useState<string[] | null>(null);
+  
+  const [currentRef, currentInView] = useInView();
+  const [pastRef, pastInView] = useInView();
+  const [skillsRef, skillsInView] = useInView();
+  const [contactRef, contactInView] = useInView();
 
   useEffect(() => {
     setIsVisible(true);
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white w-full">
       {/* Header/Hero Section */}
-      <header className="bg-gradient-to-r from-blue-950 via-blue-700 to-blue-400 animate-color-change text-white py-20">
-        <div className="container mx-auto px-4">
+      <header className="bg-gradient-to-r from-blue-950 via-blue-700 to-blue-400 animate-color-change text-white min-h-screen flex items-center justify-center w-full">
+        <div className="w-full max-w-7xl mx-auto px-4">
           <div className={`flex flex-col items-center text-center ${isVisible ? 'animate-fade-in' : 'opacity-0'}`}>
             <img 
               src={about.photo}
               alt={about.name}
-              className="w-48 h-48 object-cover rounded-full border-4 border-white shadow-lg mb-6 hover:scale-105 transition-transform duration-300"
+              className="w-24 h-24 md:w-32 md:h-32 lg:w-48 lg:h-48 object-cover rounded-full border-4 border-white shadow-lg mb-4 md:mb-6"
             />
-            <h1 className="text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-white to-blue-200">
+            <h1 className="text-2xl md:text-3xl lg:text-5xl font-bold mb-4">
               {about.name}
             </h1>
-            <p className="text-xl max-w-2xl mb-8 text-blue-50">{about.description}</p>
+            <p className="text-base md:text-lg lg:text-xl max-w-2xl mb-4 md:mb-6 lg:mb-8 text-blue-50 px-4">
+              {about.description}
+            </p>
             
             {/* Social Links */}
-            <div className="flex space-x-6">
+            <div className="flex space-x-6 md:space-x-6">
+              <a href={`${import.meta.env.BASE_URL}assets/cv/mycv.pdf`} className="hover:text-blue-200 transition-colors transform hover:-translate-y-1 duration-300" target="_blank" rel="noopener noreferrer">
+                <FileText size={24} />
+              </a>
               <a href={socialLinks.github} className="hover:text-blue-200 transition-colors transform hover:-translate-y-1 duration-300">
                 <Github size={24} />
               </a>
@@ -98,43 +128,52 @@ function App() {
         </div>
       </header>
 
-      {/* Current Project Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-12 text-indigo-900">Current Project Working On</h2>
-          <div className="max-w-4xl mx-auto">
-            <div className="bg-white rounded-lg shadow-xl overflow-hidden project-card">
-              <img 
-                src={projects.current.image} 
-                alt={projects.current.title}
-                className="w-full h-64 object-cover"
-              />
-              <div className="p-8">
-                <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-2xl font-bold text-indigo-900">{projects.current.title}</h3>
-                  <a href={projects.current.link} className="text-indigo-600 hover:text-indigo-800 flex items-center gap-1">
-                    View Project <ExternalLink size={16} />
-                  </a>
-                </div>
-                <p className="text-gray-600 mb-4">{projects.current.description}</p>
-                <div className="flex flex-wrap gap-2">
-                  {projects.current.technologies.map((tech) => (
-                    <span key={tech} className="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm">
-                      {tech}
-                    </span>
-                  ))}
+      {/* Rest of the sections with a relative position */}
+      <main className="relative">
+        {/* Current Project Section */}
+        <section 
+          ref={currentRef as React.RefObject<HTMLElement>} 
+          className={`py-12 md:py-20 bg-white blur-in ${currentInView ? 'animate' : ''}`}
+        >
+          <div className="container mx-auto px-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 text-indigo-900">Current Project Working On</h2>
+            <div className="max-w-4xl mx-auto">
+              <div className="bg-white rounded-lg shadow-xl overflow-hidden project-card">
+                <img 
+                  src={projects.current.image} 
+                  alt={projects.current.title}
+                  className="w-full h-64 object-cover"
+                />
+                <div className="p-8">
+                  <div className="flex justify-between items-center mb-4">
+                    <h3 className="text-2xl font-bold text-indigo-900">{projects.current.title}</h3>
+                    <a href={projects.current.link} className="text-indigo-600 hover:text-indigo-800 flex items-center gap-1">
+                      View Project <ExternalLink size={16} />
+                    </a>
+                  </div>
+                  <p className="text-gray-600 mb-4">{projects.current.description}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {projects.current.technologies.map((tech) => (
+                      <span key={tech} className="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Past Projects Section */}
-      <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-12 text-indigo-900">Other Projects</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Past Projects Section */}
+        <section 
+          ref={pastRef as React.RefObject<HTMLElement>} 
+          className={`py-12 md:py-20 bg-gradient-to-b from-gray-50 to-white`}
+        >
+          <h2 className={`text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 text-indigo-900 rotate-in ${pastInView ? 'animate' : ''}`}>
+            Other Projects
+          </h2>
+          <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 stagger-children ${pastInView ? 'animate' : ''}`}>
             {projects.past.map((project, index) => (
               <div 
                 key={project.title} 
@@ -166,14 +205,17 @@ function App() {
               </div>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Skills Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-12 text-indigo-900">Skills</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 max-w-5xl mx-auto">
+        {/* Skills Section */}
+        <section 
+          ref={skillsRef as React.RefObject<HTMLElement>} 
+          className={`py-12 md:py-20 bg-white`}
+        >
+          <h2 className={`text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 text-indigo-900 pop-in ${skillsInView ? 'animate' : ''}`}>
+            Skills
+          </h2>
+          <div className={`grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8 max-w-5xl mx-auto stagger-children ${skillsInView ? 'animate' : ''}`}>
             {about.skills.map((skill, index) => (
               <div 
                 key={skill.name} 
@@ -188,32 +230,35 @@ function App() {
               </div>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Contact Section */}
-      <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold mb-8 text-indigo-900">Let's Connect</h2>
-          <p className="text-xl mb-8 text-gray-600">
-            I'm always open to discussing new projects and opportunities.
-          </p>
-          <a 
-            href={`mailto:${about.email}`}
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-800 to-blue-600 text-white px-8 py-3 rounded-lg hover:from-blue-900 hover:to-blue-700 transition-all duration-300 transform hover:-translate-y-1 shadow-lg"
-          >
-            <Mail size={20} />
-            Get in Touch
-          </a>
-        </div>
-      </section>
+        {/* Contact Section */}
+        <section 
+          ref={contactRef as React.RefObject<HTMLElement>} 
+          className={`py-12 md:py-20 bg-gradient-to-b from-gray-50 to-white float-in ${contactInView ? 'animate' : ''}`}
+        >
+          <div className="container mx-auto px-4 text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 md:mb-8 text-indigo-900">Let's Connect</h2>
+            <p className="text-lg md:text-xl mb-6 md:mb-8 text-gray-600">
+              I'm always open to discussing new projects and opportunities.
+            </p>
+            <a 
+              href={`mailto:${about.email}`}
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-800 to-blue-600 text-white px-8 py-3 rounded-lg hover:from-blue-900 hover:to-blue-700 transition-all duration-300 transform hover:-translate-y-1 shadow-lg"
+            >
+              <Mail size={20} />
+              Get in Touch
+            </a>
+          </div>
+        </section>
 
-      {/* Footer */}
-      <footer className="bg-gradient-to-r from-blue-900 via-blue-800 to-blue-700 text-white py-8">
-        <div className="container mx-auto px-4 text-center">
-          <p>© {new Date().getFullYear()} {about.name}. All rights reserved.</p>
-        </div>
-      </footer>
+        {/* Footer */}
+        <footer className="bg-gradient-to-r from-blue-900 via-blue-800 to-blue-700 text-white py-8">
+          <div className="container mx-auto px-4 text-center">
+            <p>© {new Date().getFullYear()} {about.name}. All rights reserved.</p>
+          </div>
+        </footer>
+      </main>
 
       {/* Image Gallery Modal */}
       {selectedImages && (

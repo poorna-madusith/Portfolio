@@ -44,6 +44,79 @@
   }
 }
 
+@keyframes slideLeft {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideRight {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes floatUp {
+  from { transform: translateY(100px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes rotateIn {
+  from { transform: rotate(-10deg) scale(0.9); opacity: 0; }
+  to { transform: rotate(0) scale(1); opacity: 1; }
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.6); opacity: 0; }
+  60% { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes blurIn {
+  from { 
+    filter: blur(10px);
+    transform: scale(1.1);
+    opacity: 0;
+  }
+  to {
+    filter: blur(0);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 .animate-fade-in {
   animation: fadeIn 0.6s ease-out forwards;
 }
@@ -66,6 +139,30 @@
   animation: colorChange 5s ease infinite;
 }
 
+.animate-slide-left {
+  animation: slideLeft 0.3s ease-out forwards;
+}
+
+.animate-slide-right {
+  animation: slideRight 0.3s ease-out forwards;
+}
+
+.scroll-animate {
+  opacity: 0;
+}
+
+.scroll-animate.animate {
+  animation: slideUpFade 0.6s ease forwards;
+}
+
+.scroll-animate-right {
+  opacity: 0;
+}
+
+.scroll-animate-right.animate {
+  animation: slideInRight 0.6s ease forwards;
+}
+
 .skill-icon:hover {
   transform: translateY(-5px);
   transition: transform 0.3s ease;
@@ -78,4 +175,111 @@
 .project-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.float-in {
+  opacity: 0;
+}
+
+.float-in.animate {
+  animation: floatUp 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+.rotate-in {
+  opacity: 0;
+}
+
+.rotate-in.animate {
+  animation: rotateIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.pop-in {
+  opacity: 0;
+}
+
+.pop-in.animate {
+  animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.blur-in {
+  opacity: 0;
+}
+
+.blur-in.animate {
+  animation: blurIn 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+/* Add stagger delays for children */
+.stagger-children > * {
+  opacity: 0;
+}
+
+.stagger-children.animate > * {
+  animation: floatUp 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+.stagger-children.animate > *:nth-child(1) { animation-delay: 0.1s; }
+.stagger-children.animate > *:nth-child(2) { animation-delay: 0.2s; }
+.stagger-children.animate > *:nth-child(3) { animation-delay: 0.3s; }
+.stagger-children.animate > *:nth-child(4) { animation-delay: 0.4s; }
+.stagger-children.animate > *:nth-child(5) { animation-delay: 0.5s; }
+
+/* Add these mobile-specific styles */
+@media (max-width: 640px) {
+  .project-card {
+    margin-bottom: 1rem;
+  }
+
+  .skill-icon {
+    transform: scale(0.9);
+  }
+}
+
+/* Improve modal for mobile */
+@media (max-width: 640px) {
+  .modal-content {
+    padding: 1rem;
+  }
+  
+  .modal-image {
+    max-height: 80vh;
+  }
+}
+
+/* Improve touch interactions */
+@media (max-width: 640px) {
+  /* Make buttons and interactive elements at least 44x44px for touch */
+  .project-card a,
+  .skill-icon,
+  button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Add more space between touch targets */
+  .project-card {
+    margin-bottom: 1.5rem;
+  }
+
+  /* Prevent text from being too small */
+  html {
+    font-size: 16px; /* Ensure base font size is readable */
+  }
+
+  /* Improve modal usability on mobile */
+  .modal-content {
+    padding: 1rem;
+    margin: 0.5rem;
+    width: calc(100% - 1rem);
+  }
+}
+
+/* Add touch feedback */
+@media (hover: none) {
+  .project-card:active,
+  .skill-icon:active,
+  button:active {
+    transform: scale(0.98);
+    transition: transform 0.1s;
+  }
 }
