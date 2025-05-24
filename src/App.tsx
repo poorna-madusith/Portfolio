@@ -223,7 +223,7 @@ function App() {
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div className="w-20 h-20 flex items-center justify-center rounded-full bg-gradient-to-br from-indigo-100 to-blue-50 mb-4 shadow-md">
-                  <span className="text-3xl">{skill.icon}</span>
+                  <img src={skill.icon} alt={skill.name} className="w-10 h-10" />
                 </div>
                 <h3 className="text-lg font-semibold text-indigo-900">{skill.name}</h3>
                 <span className="text-sm text-indigo-600">{skill.level}</span>
