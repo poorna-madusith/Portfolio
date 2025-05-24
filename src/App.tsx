@@ -79,7 +79,6 @@ function App() {
   const [isVisible, setIsVisible] = useState(false);
   const [selectedImages, setSelectedImages] = useState<string[] | null>(null);
   
-  const [currentRef, currentInView] = useInView();
   const [pastRef, pastInView] = useInView();
   const [skillsRef, skillsInView] = useInView();
   const [contactRef, contactInView] = useInView();
@@ -101,12 +100,19 @@ function App() {
               // Profile image border changed to border-white and added shadow-xl
               className="w-24 h-24 md:w-32 md:h-32 lg:w-48 lg:h-48 object-cover rounded-full border-4 border-white shadow-xl mb-6 md:mb-8" 
             />
+feat/skill-icons
+            <h1 className="text-2xl md:text-3xl lg:text-5xl font-bold mb-4 tracking-tight">
+              {about.name}
+            </h1>
+            <p className="text-base md:text-lg lg:text-xl max-w-2xl mb-4 md:mb-6 lg:mb-8 text-blue-50 px-4 leading-relaxed">
+
             {/* Name: Text color is white, font-bold. Sizes are responsive. */}
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 text-white"> 
               {about.name}
             </h1>
             {/* Description: Text color text-gray-200. Increased max-width for potentially larger text. */}
             <p className="text-base sm:text-lg md:text-xl max-w-3xl mb-6 md:mb-8 text-gray-200 px-4"> 
+main
               {about.description}
             </p>
             
@@ -138,6 +144,9 @@ function App() {
 
       {/* Rest of the sections with a relative position */}
       <main className="relative">
+feat/skill-icons
+        {/* Projects Section */}
+
         {/* Current Project Section */}
         <section 
           ref={currentRef as React.RefObject<HTMLElement>} 
@@ -177,13 +186,19 @@ function App() {
         </section>
 
         {/* Past Projects Section */}
+ main
         <section 
           ref={pastRef as React.RefObject<HTMLElement>} 
           className={`py-12 md:py-20 bg-secondary`} // Kept bg-secondary as per decision
         >
+ feat/skill-icons
+          <h2 className={`text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 text-indigo-900 scroll-animate tracking-tight ${pastInView ? 'animate' : ''}`}>
+            My Projects
+
           {/* h2 already uses text-primary from global styles */}
           <h2 className={`text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 rotate-in ${pastInView ? 'animate' : ''}`}>
             Other Projects
+ main
           </h2>
           <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 stagger-children ${pastInView ? 'animate' : ''}`}>
             {projects.past.map((project, index) => (
@@ -199,6 +214,15 @@ function App() {
                   onClick={() => setSelectedImages(project.images)}
                 />
                 <div className="p-6">
+feat/skill-icons
+                  <div className="flex justify-between items-center mb-4">
+                    <h3 className="text-xl font-bold text-indigo-900">{project.title}</h3>
+                    <a href={project.link} className="text-indigo-600 hover:text-indigo-800 group transition-all duration-300">
+                      <ExternalLink size={16} className="transform group-hover:translate-x-1 transition-transform duration-300" />
+                    </a>
+                  </div>
+                  <p className="text-gray-600 mb-4 leading-relaxed">{project.description}</p>
+
                   <div className="flex flex-wrap justify-between items-center mb-4 gap-2"> {/* Added flex-wrap and gap-2 for responsiveness */}
                     {/* h3 already uses text-primary from global styles */}
                     <h3 className="text-xl font-bold">{project.title}</h3>
@@ -207,6 +231,7 @@ function App() {
                     </a>
                   </div>
                   <p className="text-text-secondary mb-4">{project.description}</p> {/* Already text-text-secondary */}
+main
                   <div className="flex flex-wrap gap-2">
                     {project.technologies.map((tech) => (
                       // Updated to bg-accent/15 text-teal-700 (darker accent text)
@@ -226,8 +251,12 @@ function App() {
           ref={skillsRef as React.RefObject<HTMLElement>} 
           className={`py-12 md:py-20 bg-white`} {/* Updated background to bg-white */}
         >
+ feat/skill-icons
+          <h2 className={`text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 text-indigo-900 scroll-animate tracking-tight ${skillsInView ? 'animate' : ''}`}>
+
           {/* h2 uses text-primary from global styles */}
           <h2 className={`text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 pop-in ${skillsInView ? 'animate' : ''}`}>
+ main
             Skills
           </h2>
           <div className={`grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8 max-w-5xl mx-auto stagger-children ${skillsInView ? 'animate' : ''}`}>
@@ -253,6 +282,13 @@ function App() {
         {/* Contact Section */}
         <section 
           ref={contactRef as React.RefObject<HTMLElement>} 
+ feat/skill-icons
+          className={`py-12 md:py-20 bg-gradient-to-b from-gray-50 to-white scroll-animate ${contactInView ? 'animate' : ''}`}
+        >
+          <div className="container mx-auto px-4 text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 md:mb-8 text-indigo-900 tracking-tight">Let's Connect</h2>
+            <p className="text-lg md:text-xl mb-6 md:mb-8 text-gray-600 leading-relaxed">
+
           className={`py-12 md:py-20 bg-secondary float-in ${contactInView ? 'animate' : ''}`} {/* Updated background to bg-secondary */}
         >
           <div className="container mx-auto px-4 text-center">
@@ -260,6 +296,7 @@ function App() {
             <h2 className="text-3xl md:text-4xl font-bold mb-6 md:mb-8">Let's Connect</h2>
             {/* text-text-secondary is already applied from previous steps */}
             <p className="text-lg md:text-xl mb-6 md:mb-8 text-text-secondary">
+ main
               I'm always open to discussing new projects and opportunities.
             </p>
             {/* Button styles confirmed to be from-primary to-accent and hover:from-primary/90 hover:to-accent/90 */}

@@ -4,18 +4,18 @@ export const about = {
   description: "Hi, I'm Poorna Kahandakorala! A second-year Computer Science undergraduate passionate about coding and technology. Welcome to my GitHub profile!.",
   email: "poornamadusith95@gmail.com",
   skills: [
-    { name: "React", icon: "/assets/icons/react.svg", level: "Intermediate" },
-    { name: "JavaScript", icon: "/assets/icons/javascript.svg", level: "Advanced" },
-    { name: "TypeScript", icon: "/assets/icons/typescript.svg", level: "Intermediate" },
-    { name: "React Native", icon: "/assets/icons/reactnative.svg", level: "Intermediate" },
-    { name: "Node.js", icon: "/assets/icons/nodejs.svg", level: "Intermediate" },
-    { name: "Python", icon: "/assets/icons/python.svg", level: "Advanced" },
-    { name: "Java", icon: "/assets/icons/java.svg", level: "Advanced" },
-    { name: "HTML5", icon: "/assets/icons/html5.svg", level: "Advanced" },
-    { name: "CSS3", icon: "/assets/icons/css3.svg", level: "Advanced" },
-    { name: "MongoDB", icon: "/assets/icons/mongodb.svg", level: "Intermediate" },
-    { name: "MySQL", icon: "/assets/icons/mysql.svg", level: "Advanced" },
-    { name: "Git", icon: "/assets/icons/git.svg", level: "Advanced" },
+    { name: "React", icon: "/Portfolio/assets/icons/react.svg", level: "Intermediate" },
+    { name: "JavaScript", icon: "/Portfolio/assets/icons/javascript.svg", level: "Advanced" },
+    { name: "TypeScript", icon: "/Portfolio/assets/icons/typescript.svg", level: "Intermediate" },
+    { name: "React Native", icon: "/Portfolio/assets/icons/reactnative.svg", level: "Intermediate" },
+    { name: "Node.js", icon: "/Portfolio/assets/icons/nodejs.svg", level: "Intermediate" },
+    { name: "Python", icon: "/Portfolio/assets/icons/python.svg", level: "Advanced" },
+    { name: "Java", icon: "/Portfolio/assets/icons/java.svg", level: "Advanced" },
+    { name: "HTML5", icon: "/Portfolio/assets/icons/html5.svg", level: "Advanced" },
+    { name: "CSS3", icon: "/Portfolio/assets/icons/css3.svg", level: "Advanced" },
+    { name: "MongoDB", icon: "/Portfolio/assets/icons/mongodb.svg", level: "Intermediate" },
+    { name: "MySQL", icon: "/Portfolio/assets/icons/mysql.svg", level: "Advanced" },
+    { name: "Git", icon: "/Portfolio/assets/icons/git.svg", level: "Advanced" },
   ]
 };
 
@@ -27,13 +27,6 @@ export const socialLinks = {
 };
 
 export const projects = {
-  current: {
-    title: "Export crops disease detection mobile app(GreenGuard)",
-    description: "GreenGuard is a mobile application that helps farmers detect diseases in export crops. The app uses machine learning models to identify diseases in crops and provide recommendations for treatment. It also has features like daily export crop rates, weather checking, a dashboard, and a community posting platform. The app is built using React Native, TensorFlow, and Node.js.",
-    image: "/Portfolio/assets/images/Plant-Disease-Detection.jpg",
-    link: "https://www.greenguardlk.com/",
-    technologies: ["React Native", "TensorFlow", "Node.js", "node.js", "Python", "TypeScript"]
-  },
   past: [
     {
       title: "Healthcare and Well-being Website",
@@ -107,6 +100,30 @@ export const projects = {
       ],
       link: "https://github.com/poorna-madusith/personal-financial-tracker",
       technologies: ["Python", "Tkinter", "JSON"]
+    },
+    {
+      title: "Disease Detection Mobile App",
+      description: "GreenGuard is a mobile application that helps farmers detect diseases in export crops. The app uses machine learning models to identify diseases in crops and provide recommendations for treatment. It also has features like daily export crop rates, weather checking, a dashboard, and a community posting platform. The app is built using React Native, TensorFlow, and Node.js.",
+      image: "/Portfolio/assets/images/gg1.png",
+      images: [
+        "/Portfolio/assets/images/gg1.png",
+        "/Portfolio/assets/images/gg2.png",
+        "/Portfolio/assets/images/gg3.png"
+      ],
+      link: "https://www.greenguardlk.com/",
+      technologies: ["ReactNative", "TensorFlow", "Node.js","python"]
+    },
+    {
+      title: "Project Title 2",
+      description: "Full Stack Inventory Management System A comprehensive inventory and customer management system built for gadget retailers. This full-stack web application showcases robust data handling, clean architecture, and a responsive user interface.",
+      image: "/Portfolio/assets/images/iv1.png",
+      images: [
+        "/Portfolio/assets/images/iv1.png",
+        "/Portfolio/assets/images/iv2.png",
+        "/Portfolio/assets/images/iv3.png"
+      ],
+      link: "https://github.com/poorna-madusith/inventory_maganemnt_system",
+      technologies: [" ASP.NET ", "SqlServer", "Angular 19", "Bootstrap"]
     }
   ]
 };
