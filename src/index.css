@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  @apply text-text-primary font-sans bg-secondary;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply text-primary font-sans;
+}
+
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
@@ -32,7 +40,7 @@
 @keyframes colorChange {
   0% {
     background-position: 0% 50%;
-    background-size: 200% 200%;
+    background-size: 150% 150%; /* Reduced from 200% */
   }
   50% {
     background-position: 100% 50%;
@@ -40,7 +48,7 @@
   }
   100% {
     background-position: 0% 50%;
-    background-size: 200% 200%;
+    background-size: 150% 150%; /* Reduced from 200% */
   }
 }
 
@@ -132,11 +140,16 @@
 .animate-gradient {
   background-size: 200% 200%;
   animation: gradientAnimation 15s ease infinite;
+  /* Ensure gradient uses theme colors if applicable, though this one is generic */
 }
 
 .animate-color-change {
-  background-size: 200% 200%;
-  animation: colorChange 5s ease infinite;
+  background-size: 150% 150%; /* Match initial keyframe size */
+  animation: colorChange 10s ease infinite; /* Increased duration from 5s to 10s */
+  /* Example: if this animation was specific to a theme color, update it like:
+     background-image: linear-gradient(to right, theme('colors.primary'), theme('colors.accent')); 
+     This specific keyframe seems to be about the animation effect itself rather than specific colors.
+  */
 }
 
 .animate-slide-left {
@@ -174,7 +187,7 @@
 
 .project-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  @apply shadow-lg hover:shadow-xl shadow-primary/10 hover:shadow-primary/20; /* Updated shadow to use theme color with opacity and new spec */
 }
 
 .float-in {
