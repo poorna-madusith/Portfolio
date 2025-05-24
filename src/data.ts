@@ -27,13 +27,6 @@ export const socialLinks = {
 };
 
 export const projects = {
-  current: {
-    title: "Export crops disease detection mobile app(GreenGuard)",
-    description: "GreenGuard is a mobile application that helps farmers detect diseases in export crops. The app uses machine learning models to identify diseases in crops and provide recommendations for treatment. It also has features like daily export crop rates, weather checking, a dashboard, and a community posting platform. The app is built using React Native, TensorFlow, and Node.js.",
-    image: "/Portfolio/assets/images/Plant-Disease-Detection.jpg",
-    link: "https://www.greenguardlk.com/",
-    technologies: ["React Native", "TensorFlow", "Node.js", "node.js", "Python", "TypeScript"]
-  },
   past: [
     {
       title: "Healthcare and Well-being Website",
@@ -107,6 +100,30 @@ export const projects = {
       ],
       link: "https://github.com/poorna-madusith/personal-financial-tracker",
       technologies: ["Python", "Tkinter", "JSON"]
+    },
+    {
+      title: "Disease Detection Mobile App",
+      description: "GreenGuard is a mobile application that helps farmers detect diseases in export crops. The app uses machine learning models to identify diseases in crops and provide recommendations for treatment. It also has features like daily export crop rates, weather checking, a dashboard, and a community posting platform. The app is built using React Native, TensorFlow, and Node.js.",
+      image: "/Portfolio/assets/images/gg1.png",
+      images: [
+        "/Portfolio/assets/images/gg1.png",
+        "/Portfolio/assets/images/gg2.png",
+        "/Portfolio/assets/images/gg3.png"
+      ],
+      link: "https://www.greenguardlk.com/",
+      technologies: ["ReactNative", "TensorFlow", "Node.js","python"]
+    },
+    {
+      title: "Project Title 2",
+      description: "Full Stack Inventory Management System A comprehensive inventory and customer management system built for gadget retailers. This full-stack web application showcases robust data handling, clean architecture, and a responsive user interface.",
+      image: "/Portfolio/assets/images/iv1.png",
+      images: [
+        "/Portfolio/assets/images/iv1.png",
+        "/Portfolio/assets/images/iv2.png",
+        "/Portfolio/assets/images/iv3.png"
+      ],
+      link: "https://github.com/poorna-madusith/inventory_maganemnt_system",
+      technologies: [" ASP.NET ", "SqlServer", "Angular 19", "Bootstrap"]
     }
   ]
 };

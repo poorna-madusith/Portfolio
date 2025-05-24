@@ -76,7 +76,6 @@ function App() {
   const [isVisible, setIsVisible] = useState(false);
   const [selectedImages, setSelectedImages] = useState<string[] | null>(null);
   
-  const [currentRef, currentInView] = useInView();
   const [pastRef, pastInView] = useInView();
   const [skillsRef, skillsInView] = useInView();
   const [contactRef, contactInView] = useInView();
@@ -130,48 +129,13 @@ function App() {
 
       {/* Rest of the sections with a relative position */}
       <main className="relative">
-        {/* Current Project Section */}
-        <section 
-          ref={currentRef as React.RefObject<HTMLElement>} 
-          className={`py-12 md:py-20 bg-white scroll-animate ${currentInView ? 'animate' : ''}`}
-        >
-          <div className="container mx-auto px-4">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 text-indigo-900 tracking-tight">Current Project Working On</h2>
-            <div className="max-w-4xl mx-auto">
-              <div className="bg-white rounded-lg shadow-xl overflow-hidden project-card">
-                <img 
-                  src={projects.current.image} 
-                  alt={projects.current.title}
-                  className="w-full h-64 object-cover"
-                />
-                <div className="p-8">
-                  <div className="flex justify-between items-center mb-4">
-                    <h3 className="text-2xl font-bold text-indigo-900">{projects.current.title}</h3>
-                    <a href={projects.current.link} className="text-indigo-600 hover:text-indigo-800 flex items-center gap-1 group transition-all duration-300">
-                      View Project <ExternalLink size={16} className="transform group-hover:translate-x-1 transition-transform duration-300" />
-                    </a>
-                  </div>
-                  <p className="text-gray-600 mb-4 leading-relaxed">{projects.current.description}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {projects.current.technologies.map((tech) => (
-                      <span key={tech} className="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Past Projects Section */}
+        {/* Projects Section */}
         <section 
           ref={pastRef as React.RefObject<HTMLElement>} 
           className={`py-12 md:py-20 bg-gradient-to-b from-gray-50 to-white`}
         >
           <h2 className={`text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 text-indigo-900 scroll-animate tracking-tight ${pastInView ? 'animate' : ''}`}>
-            Other Projects
+            My Projects
           </h2>
           <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 stagger-children ${pastInView ? 'animate' : ''}`}>
             {projects.past.map((project, index) => (
