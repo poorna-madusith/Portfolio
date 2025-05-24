@@ -2,12 +2,128 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply text-text-primary font-sans bg-secondary;
+@layer base {
+  body {
+    @apply text-text-primary font-sans bg-secondary;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-primary font-sans;
+  }
 }
 
-h1, h2, h3, h4, h5, h6 {
-  @apply text-primary font-sans;
+@layer components {
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+
+  .animate-slide-in {
+    animation: slideIn 0.6s ease-out forwards;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.5s ease-out forwards;
+  }
+
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradientAnimation 15s ease infinite;
+  }
+
+  .animate-color-change {
+    background-size: 150% 150%;
+    animation: colorChange 10s ease infinite;
+    background-image: linear-gradient(to right, theme('colors.primary'), theme('colors.accent'));
+  }
+
+  .animate-slide-left {
+    animation: slideLeft 0.3s ease-out forwards;
+  }
+
+  .animate-slide-right {
+    animation: slideRight 0.3s ease-out forwards;
+  }
+
+  .scroll-animate {
+    opacity: 0;
+  }
+
+  .scroll-animate.animate {
+    animation: slideUpFade 0.6s ease forwards;
+  }
+
+  .scroll-animate-right {
+    opacity: 0;
+  }
+
+  .scroll-animate-right.animate {
+    animation: slideInRight 0.6s ease forwards;
+  }
+
+  .skill-icon {
+    @apply transition-all duration-300;
+  }
+
+  .skill-icon:hover {
+    @apply -translate-y-2 shadow-lg;
+    filter: brightness(1.05);
+  }
+
+  .project-card {
+    @apply transition-all duration-300;
+  }
+
+  .project-card:hover {
+    @apply -translate-y-1 shadow-lg;
+  }
+
+  .float-in {
+    opacity: 0;
+  }
+
+  .float-in.animate {
+    animation: floatUp 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+  }
+
+  .rotate-in {
+    opacity: 0;
+  }
+
+  .rotate-in.animate {
+    animation: rotateIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+
+  .pop-in {
+    opacity: 0;
+  }
+
+  .pop-in.animate {
+    animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+
+  .blur-in {
+    opacity: 0;
+  }
+
+  .blur-in.animate {
+    animation: blurIn 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+  }
+
+  .stagger-children > * {
+    opacity: 0;
+  }
+
+  .stagger-children.animate > * {
+    animation: floatUp 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+  }
+}
+
+@layer utilities {
+  .stagger-children.animate > *:nth-child(1) { animation-delay: 0.1s; }
+  .stagger-children.animate > *:nth-child(2) { animation-delay: 0.2s; }
+  .stagger-children.animate > *:nth-child(3) { animation-delay: 0.3s; }
+  .stagger-children.animate > *:nth-child(4) { animation-delay: 0.4s; }
+  .stagger-children.animate > *:nth-child(5) { animation-delay: 0.5s; }
 }
 
 @keyframes fadeIn {
@@ -26,74 +142,44 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @keyframes gradientAnimation {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 @keyframes colorChange {
   0% {
     background-position: 0% 50%;
-    background-size: 150% 150%; /* Reduced from 200% */
+    background-size: 150% 150%;
   }
   50% {
     background-position: 100% 50%;
-    background-size: 200% 200%; /* Changed from 100% 100% */
+    background-size: 200% 200%;
   }
   100% {
     background-position: 0% 50%;
-    background-size: 150% 150%; /* Reduced from 200% */
+    background-size: 150% 150%;
   }
 }
 
 @keyframes slideLeft {
-  from {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
 }
 
 @keyframes slideRight {
-  from {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
+  from { transform: translateX(-100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
 }
 
 @keyframes slideUpFade {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes floatUp {
@@ -125,189 +211,44 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-.animate-fade-in {
-  animation: fadeIn 0.6s ease-out forwards;
-}
-
-.animate-slide-in {
-  animation: slideIn 0.6s ease-out forwards;
-}
-
-.animate-scale-in {
-  animation: scaleIn 0.5s ease-out forwards;
-}
-
-.animate-gradient {
-  background-size: 200% 200%;
-  animation: gradientAnimation 15s ease infinite;
-  /* Ensure gradient uses theme colors if applicable, though this one is generic */
-}
-
-.animate-color-change {
- feat/skill-icons
-  background-size: 200% 200%;
-  animation: colorChange 10s ease infinite;
-
-  background-size: 150% 150%; /* Match initial keyframe size */
-  animation: colorChange 10s ease infinite; /* Increased duration from 5s to 10s */
-  /* Example: if this animation was specific to a theme color, update it like:
-     background-image: linear-gradient(to right, theme('colors.primary'), theme('colors.accent')); 
-     This specific keyframe seems to be about the animation effect itself rather than specific colors.
-  */
- main
-}
-
-.animate-slide-left {
-  animation: slideLeft 0.3s ease-out forwards;
-}
-
-.animate-slide-right {
-  animation: slideRight 0.3s ease-out forwards;
-}
-
-.scroll-animate {
-  opacity: 0;
-}
-
-.scroll-animate.animate {
-  animation: slideUpFade 0.6s ease forwards;
-}
-
-.scroll-animate-right {
-  opacity: 0;
-}
-
-.scroll-animate-right.animate {
-  animation: slideInRight 0.6s ease forwards;
-}
-
-.skill-icon { /* Added base class for transition */
-  transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
-}
-
-.skill-icon:hover {
-  transform: translateY(-8px); /* Increased translateY */
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Added/Enhanced shadow */
-  filter: brightness(1.05); /* Subtle brightness increase */
-}
-
-.project-card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.project-card:hover {
- feat/skill-icons
-  transform: translateY(-5px) scale(1.03); /* Added scale */
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-
-  transform: translateY(-5px);
-  @apply shadow-lg hover:shadow-xl shadow-primary/10 hover:shadow-primary/20; /* Updated shadow to use theme color with opacity and new spec */
- main
-}
-
-.float-in {
-  opacity: 0;
-}
-
-.float-in.animate {
-  animation: floatUp 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-}
-
-.rotate-in {
-  opacity: 0;
-}
-
-.rotate-in.animate {
-  animation: rotateIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-}
-
-.pop-in {
-  opacity: 0;
-}
-
-.pop-in.animate {
-  animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-}
-
-.blur-in {
-  opacity: 0;
-}
-
-.blur-in.animate {
-  animation: blurIn 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-}
-
-/* Add stagger delays for children */
-.stagger-children > * {
-  opacity: 0;
-}
-
-.stagger-children.animate > * {
-  animation: floatUp 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-}
-
-.stagger-children.animate > *:nth-child(1) { animation-delay: 0.1s; }
-.stagger-children.animate > *:nth-child(2) { animation-delay: 0.2s; }
-.stagger-children.animate > *:nth-child(3) { animation-delay: 0.3s; }
-.stagger-children.animate > *:nth-child(4) { animation-delay: 0.4s; }
-.stagger-children.animate > *:nth-child(5) { animation-delay: 0.5s; }
-
-/* Add these mobile-specific styles */
+/* Mobile styles */
 @media (max-width: 640px) {
   .project-card {
-    margin-bottom: 1rem;
+    @apply mb-6;
   }
 
   .skill-icon {
-    transform: scale(0.9);
+    @apply scale-90;
   }
-}
 
-/* Improve modal for mobile */
-@media (max-width: 640px) {
   .modal-content {
-    padding: 1rem;
+    @apply p-4;
   }
-  
-  .modal-image {
-    max-height: 80vh;
-  }
-}
 
-/* Improve touch interactions */
-@media (max-width: 640px) {
-  /* Make buttons and interactive elements at least 44x44px for touch */
+  .modal-image {
+    @apply max-h-[80vh];
+  }
+
   .project-card a,
   .skill-icon,
   button {
-    min-height: 44px;
-    min-width: 44px;
+    @apply min-h-[44px] min-w-[44px];
   }
 
-  /* Add more space between touch targets */
-  .project-card {
-    margin-bottom: 1.5rem;
-  }
-
-  /* Prevent text from being too small */
   html {
-    font-size: 16px; /* Ensure base font size is readable */
+    @apply text-base;
   }
 
-  /* Improve modal usability on mobile */
   .modal-content {
-    padding: 1rem;
-    margin: 0.5rem;
-    width: calc(100% - 1rem);
+    @apply p-4 m-2 w-[calc(100%-1rem)];
   }
 }
 
-/* Add touch feedback */
+/* Touch feedback */
 @media (hover: none) {
   .project-card:active,
   .skill-icon:active,
   button:active {
-    transform: scale(0.98);
-    transition: transform 0.1s;
+    @apply scale-95 transition-transform duration-100;
   }
 }
