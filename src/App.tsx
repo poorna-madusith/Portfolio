@@ -96,10 +96,10 @@ function App() {
               alt={about.name}
               className="w-24 h-24 md:w-32 md:h-32 lg:w-48 lg:h-48 object-cover rounded-full border-4 border-white shadow-lg mb-4 md:mb-6"
             />
-            <h1 className="text-2xl md:text-3xl lg:text-5xl font-bold mb-4">
+            <h1 className="text-2xl md:text-3xl lg:text-5xl font-bold mb-4 tracking-tight">
               {about.name}
             </h1>
-            <p className="text-base md:text-lg lg:text-xl max-w-2xl mb-4 md:mb-6 lg:mb-8 text-blue-50 px-4">
+            <p className="text-base md:text-lg lg:text-xl max-w-2xl mb-4 md:mb-6 lg:mb-8 text-blue-50 px-4 leading-relaxed">
               {about.description}
             </p>
             
@@ -133,10 +133,10 @@ function App() {
         {/* Current Project Section */}
         <section 
           ref={currentRef as React.RefObject<HTMLElement>} 
-          className={`py-12 md:py-20 bg-white blur-in ${currentInView ? 'animate' : ''}`}
+          className={`py-12 md:py-20 bg-white scroll-animate ${currentInView ? 'animate' : ''}`}
         >
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 text-indigo-900">Current Project Working On</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 text-indigo-900 tracking-tight">Current Project Working On</h2>
             <div className="max-w-4xl mx-auto">
               <div className="bg-white rounded-lg shadow-xl overflow-hidden project-card">
                 <img 
@@ -147,11 +147,11 @@ function App() {
                 <div className="p-8">
                   <div className="flex justify-between items-center mb-4">
                     <h3 className="text-2xl font-bold text-indigo-900">{projects.current.title}</h3>
-                    <a href={projects.current.link} className="text-indigo-600 hover:text-indigo-800 flex items-center gap-1">
-                      View Project <ExternalLink size={16} />
+                    <a href={projects.current.link} className="text-indigo-600 hover:text-indigo-800 flex items-center gap-1 group transition-all duration-300">
+                      View Project <ExternalLink size={16} className="transform group-hover:translate-x-1 transition-transform duration-300" />
                     </a>
                   </div>
-                  <p className="text-gray-600 mb-4">{projects.current.description}</p>
+                  <p className="text-gray-600 mb-4 leading-relaxed">{projects.current.description}</p>
                   <div className="flex flex-wrap gap-2">
                     {projects.current.technologies.map((tech) => (
                       <span key={tech} className="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm">
@@ -170,7 +170,7 @@ function App() {
           ref={pastRef as React.RefObject<HTMLElement>} 
           className={`py-12 md:py-20 bg-gradient-to-b from-gray-50 to-white`}
         >
-          <h2 className={`text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 text-indigo-900 rotate-in ${pastInView ? 'animate' : ''}`}>
+          <h2 className={`text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 text-indigo-900 scroll-animate tracking-tight ${pastInView ? 'animate' : ''}`}>
             Other Projects
           </h2>
           <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 stagger-children ${pastInView ? 'animate' : ''}`}>
@@ -189,11 +189,11 @@ function App() {
                 <div className="p-6">
                   <div className="flex justify-between items-center mb-4">
                     <h3 className="text-xl font-bold text-indigo-900">{project.title}</h3>
-                    <a href={project.link} className="text-indigo-600 hover:text-indigo-800">
-                      <ExternalLink size={16} />
+                    <a href={project.link} className="text-indigo-600 hover:text-indigo-800 group transition-all duration-300">
+                      <ExternalLink size={16} className="transform group-hover:translate-x-1 transition-transform duration-300" />
                     </a>
                   </div>
-                  <p className="text-gray-600 mb-4">{project.description}</p>
+                  <p className="text-gray-600 mb-4 leading-relaxed">{project.description}</p>
                   <div className="flex flex-wrap gap-2">
                     {project.technologies.map((tech) => (
                       <span key={tech} className="px-2 py-1 bg-indigo-100 text-indigo-800 rounded-full text-xs">
@@ -212,7 +212,7 @@ function App() {
           ref={skillsRef as React.RefObject<HTMLElement>} 
           className={`py-12 md:py-20 bg-white`}
         >
-          <h2 className={`text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 text-indigo-900 pop-in ${skillsInView ? 'animate' : ''}`}>
+          <h2 className={`text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 text-indigo-900 scroll-animate tracking-tight ${skillsInView ? 'animate' : ''}`}>
             Skills
           </h2>
           <div className={`grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8 max-w-5xl mx-auto stagger-children ${skillsInView ? 'animate' : ''}`}>
@@ -235,11 +235,11 @@ function App() {
         {/* Contact Section */}
         <section 
           ref={contactRef as React.RefObject<HTMLElement>} 
-          className={`py-12 md:py-20 bg-gradient-to-b from-gray-50 to-white float-in ${contactInView ? 'animate' : ''}`}
+          className={`py-12 md:py-20 bg-gradient-to-b from-gray-50 to-white scroll-animate ${contactInView ? 'animate' : ''}`}
         >
           <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 md:mb-8 text-indigo-900">Let's Connect</h2>
-            <p className="text-lg md:text-xl mb-6 md:mb-8 text-gray-600">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 md:mb-8 text-indigo-900 tracking-tight">Let's Connect</h2>
+            <p className="text-lg md:text-xl mb-6 md:mb-8 text-gray-600 leading-relaxed">
               I'm always open to discussing new projects and opportunities.
             </p>
             <a 
