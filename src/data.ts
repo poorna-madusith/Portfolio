@@ -84,15 +84,16 @@ export const projects = {
       technologies: ["python", "opencv", "tkinter",]
     },
     {
-      title: "Wine Quality Prediction",
-      description: "A wine quality prediction system that analyzes key chemical attributes to classify wine as 'Bad,' 'Good,' or 'Best,' and provides predictions through an interactive website.",
-      image: "/Portfolio/assets/images/wine1.png",
+      title: "Note Book web app",
+      description: "A full-stack Notes App built with React and Express.js, featuring user authentication, note management, and search functionality.",
+      image: "/Portfolio/assets/images/note1.png",
       images: [
-        "/Portfolio/assets/images/wine1.png",
-        "/Portfolio/assets/images/wine2.png"
+        "/Portfolio/assets/images/note1.png",
+        "/Portfolio/assets/images/note2.png",
+        "/Portfolio/assets/images/note3.png"
       ],
-      link: "https://github.com/poorna-madusith/wine-quality-prediction-system",
-      technologies: ["Python", "Javascript", "HTML","CSS"]
+      link: "https://github.com/poorna-madusith/Note-App",
+      technologies: ["NodeJs Express", "MongoDB", "ReactJs","Tailwind"]
     },
     {
       title: "Personal Financial Tracker",
