@@ -13,7 +13,7 @@ export default {
         'text-secondary': '#64748B', // Lighter Gray for text
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
+        sans: ['Roboto', 'sans-serif'],
         // If we wanted a separate heading font:
         // heading: ['Merriweather', 'serif'],
       },
