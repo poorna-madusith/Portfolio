@@ -10,6 +10,7 @@ export const about = {
     { name: "React Native", icon: "/Portfolio/assets/icons/reactnative.svg", level: "Intermediate" },
     { name: "Angular", icon: "/Portfolio/assets/icons/angular.svg", level: "Intermediate" },
     { name: "ASP.NET", icon: "/Portfolio/assets/icons/aspnet.svg", level: "Intermediate" },
+    { name: "Spring Boot", icon: "/Portfolio/assets/icons/springboot.svg", level: "Intermediate" },
     { name: "Node.js", icon: "/Portfolio/assets/icons/nodejs.svg", level: "Intermediate" },
     { name: "Python", icon: "/Portfolio/assets/icons/python.svg", level: "Advanced" },
     { name: "Java", icon: "/Portfolio/assets/icons/java.svg", level: "Advanced" },
