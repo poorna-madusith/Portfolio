@@ -107,7 +107,7 @@
   .animate-color-change {
     background-size: 150% 150%;
     animation: colorChange 10s ease infinite;
-    background-image: linear-gradient(to right, theme('colors.primary'), theme('colors.accent'));
+    background-image: linear-gradient(to right, #0D1B4D, #00ACC1);
   }
 
   .animate-slide-left {

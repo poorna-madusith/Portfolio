@@ -3,9 +3,9 @@ export default {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
-  ],
-  theme: {
-    extend: {      colors: {
+  ],  theme: {
+    extend: {
+      colors: {
         primary: '#0D1B4D', // Darker Deep Blue
         secondary: '#F1F5F9', // Light Cool Gray
         accent: '#00ACC1',   // Teal

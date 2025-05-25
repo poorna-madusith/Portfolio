@@ -1,7 +1,7 @@
 export const about = {
   name: "Poorna Kahandakorala",
   photo: "/Portfolio/assets/images/profile.JPG",
-  description: "Hi, I'm Poorna Kahandakorala! A second-year Computer Science undergraduate passionate about coding and technology. Welcome to my GitHub profile!.",
+  description: "Hi, I'm Poorna Kahandakorala! A second-year Computer Science undergraduate passionate about coding and technology. Welcome to my portfolio!",
   email: "poornamadusith95@gmail.com",
   skills: [
     { name: "React", icon: "/Portfolio/assets/icons/react.svg", level: "Intermediate" },
