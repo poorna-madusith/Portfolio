@@ -5,9 +5,8 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {
-      colors: {
-        primary: '#1A237E', // Deep Blue
+    extend: {      colors: {
+        primary: '#0D1B4D', // Darker Deep Blue
         secondary: '#F1F5F9', // Light Cool Gray
         accent: '#00ACC1',   // Teal
         'text-primary': '#334155', // Dark Gray for text

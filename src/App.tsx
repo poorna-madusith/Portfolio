@@ -2,6 +2,7 @@ import { useEffect, useState, useCallback } from 'react';
 import { Github, Linkedin, Facebook, Instagram, Mail, ExternalLink, X, FileText, ChevronLeft, ChevronRight } from 'lucide-react';
 import { projects, socialLinks, about } from './data';
 import { useInView } from './hooks/useInView';
+import StarryBackground from './components/StarryBackground';
 
 function ImageGalleryModal({ images, onClose }: { images: string[], onClose: () => void }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -90,8 +91,9 @@ function App() {
   return (
     <div className="min-h-screen bg-secondary w-full">
       {/* Header/Hero Section */}
-      <header className="bg-gradient-to-r from-primary via-blue-800 to-primary animate-color-change text-white min-h-screen flex items-center justify-center w-full">
-        <div className="w-full max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
+      <header className="bg-gradient-to-r from-primary via-blue-800 to-primary animate-color-change text-white min-h-screen flex items-center justify-center w-full relative overflow-hidden">
+        <StarryBackground />
+        <div className="w-full max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8 relative z-10">
           <div className={`flex flex-col items-center text-center ${isVisible ? 'animate-fade-in' : 'opacity-0'}`}>
             <img 
               src={about.photo}
