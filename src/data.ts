@@ -117,7 +117,7 @@ export const projects = {
       technologies: ["ReactNative", "TensorFlow", "Node.js","python"]
     },
     {
-      title: "Project Title 2",
+      title: "Inventory Management",
       description: "Full Stack Inventory Management System A comprehensive inventory and customer management system built for gadget retailers. This full-stack web application showcases robust data handling, clean architecture, and a responsive user interface.",
       image: "/Portfolio/assets/images/iv1.png",
       images: [

@@ -80,6 +80,7 @@ function ImageGalleryModal({ images, onClose }: { images: string[], onClose: () 
 function App() {
   const [isVisible, setIsVisible] = useState(false);
   const [selectedImages, setSelectedImages] = useState<string[] | null>(null);
+  const [scrollPosition, setScrollPosition] = useState(0);
   
   const [pastRef, pastInView] = useInView();
   const [skillsRef, skillsInView] = useInView();
@@ -92,10 +93,26 @@ function App() {
   // Create a ref for the About Me section
   const [aboutMeRef, aboutMeInView] = useInView();
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const position = window.scrollY;
+      setScrollPosition(position);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-secondary dark:bg-dark-secondary w-full transition-all duration-500">
       {/* Header/Hero Section */}
-      <header className="bg-gradient-to-r from-primary via-blue-800 to-primary dark:from-dark-primary dark:via-blue-900 dark:to-dark-primary animate-color-change text-white min-h-screen flex items-center justify-center w-full relative overflow-hidden" style={{ transform: 'translateZ(0)' }}>
+      <header className="bg-gradient-to-r from-primary via-blue-800 to-primary dark:from-dark-primary dark:via-blue-900 dark:to-dark-primary animate-color-change text-white min-h-screen flex items-center justify-center w-full relative overflow-hidden transition-all duration-700" 
+        style={{ 
+          transform: `translateZ(0) translateY(${scrollPosition * 0.3}px)`,
+          opacity: Math.max(0, 1 - scrollPosition / 700)
+        }}>
         <StarryBackground />
         <div className="w-full max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8 relative z-10">
           <div className={`flex flex-col items-center text-center transition-all duration-700 ease-out ${isVisible ? 'animate-fade-in' : 'opacity-0'}`}>
@@ -144,22 +161,24 @@ function App() {
         {/* About Me Section */}
         <section 
           ref={aboutMeRef as React.RefObject<HTMLElement>}
-          className={`py-12 md:py-20 bg-white dark:bg-dark-secondary transition-colors duration-300`}
+          className={`py-12 md:py-20 bg-white dark:bg-dark-secondary transition-all duration-700 ease-in-out transform ${
+            aboutMeInView ? 'translate-y-0 opacity-100' : 'translate-y-16 opacity-0'
+          }`}
         >
           <div className="container mx-auto px-4 max-w-4xl">
-            <h2 className={`text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 pop-in dark:text-dark-text-primary ${aboutMeInView ? 'animate' : ''}`}>
+            <h2 className={`text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 dark:text-dark-text-primary transition-all duration-700 transform ${aboutMeInView ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-4 opacity-0 scale-95'}`}>
               About Me
             </h2>
-            <div className={`flex flex-col md:flex-row items-center gap-8 md:gap-12 stagger-children ${aboutMeInView ? 'animate' : ''}`} style={{ transform: 'translateZ(0)' }}>
-              <div className="md:w-1/3 rotate-in" style={{ animationDelay: '0.2s', transform: 'translateZ(0)' }}>
+            <div className={`flex flex-col md:flex-row items-center gap-8 md:gap-12 stagger-children transition-all duration-1000 ease-out ${aboutMeInView ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+              <div className={`md:w-1/3 transition-all duration-700 delay-300 ${aboutMeInView ? 'translate-y-0 opacity-100 rotate-0' : 'translate-y-8 opacity-0 rotate-12'}`}>
                 <img 
                   src="/Portfolio/assets/images/pro2.jpg"
                   alt={about.name} 
-                  className="w-48 h-48 md:w-64 md:h-64 object-cover rounded-full border-4 border-accent dark:border-dark-accent shadow-lg mx-auto"
+                  className="w-48 h-48 md:w-64 md:h-64 object-cover rounded-full border-4 border-accent dark:border-dark-accent shadow-lg mx-auto transform hover:scale-105 transition-transform duration-300"
                 />
               </div>
-              <div className="md:w-2/3 float-in" style={{ animationDelay: '0.4s', transform: 'translateZ(0)' }}>
-                <p className="text-lg md:text-xl mb-6 leading-relaxed dark:text-dark-text-primary">
+              <div className={`md:w-2/3 transition-all duration-1000 delay-500 ${aboutMeInView ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'}`}>
+                <p className="text-lg md:text-xl mb-6 leading-relaxed dark:text-dark-text-primary transform transition-all duration-500">
                   I'm a Computer Science undergraduate with a strong passion for building innovative and impactful software solutions. I specialize in full-stack development and enjoy creating seamless user experiences through both web and mobile applications.
                 </p>
                 <p className="text-lg md:text-xl mb-6 leading-relaxed dark:text-dark-text-primary">
